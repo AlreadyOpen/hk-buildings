@@ -1,0 +1,56 @@
+# Weekly bake of every Hong Kong building (Lands D CSDI), published to Hugging Face (publish.py).
+# Each run commits status/last-run.json: GitHub turns schedules off after 60 days with no commits.
+name: bake
+on:
+  schedule:
+    - cron: '30 19 * * 0'          # Mondays 03:30 HKT
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: bake
+  cancel-in-progress: false
+jobs:
+  bake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      HKB_DATA: ${{ github.workspace }}/data
+      TIPPECANOE: '2.79.0'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1   # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97   # v7.0.0
+        with:
+          python-version: '3.14'
+          cache: pip
+      - run: pip install -r requirements.txt
+      # tippecanoe built from its tagged source once, then cached (felt/tippecanoe, BSD-2-Clause)
+      - id: tc
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9   # v6.1.0
+        with:
+          path: ~/.local/tippecanoe
+          key: tippecanoe-${{ env.TIPPECANOE }}-ubuntu-24.04
+      - if: steps.tc.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update -q && sudo apt-get install -yq build-essential libsqlite3-dev zlib1g-dev
+          git clone -q --depth 1 --branch "$TIPPECANOE" https://github.com/felt/tippecanoe /tmp/tippecanoe
+          make -C /tmp/tippecanoe -j"$(nproc)" && mkdir -p ~/.local/tippecanoe/bin && cp /tmp/tippecanoe/tippecanoe ~/.local/tippecanoe/bin/
+      - if: steps.tc.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9   # v6.1.0
+        with:
+          path: ~/.local/tippecanoe
+          key: tippecanoe-${{ env.TIPPECANOE }}-ubuntu-24.04
+      - run: echo "$HOME/.local/tippecanoe/bin" >> "$GITHUB_PATH"
+      - name: bake
+        run: tippecanoe --version && python buildings.py
+      - name: publish
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: mkdir -p status && python publish.py | tee status/last-run.json
+      - name: keep-alive commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add status/last-run.json
+          git commit -m "bake $(date -u +%F)" || exit 0
+          git pull --rebase -q && git push   # main may have moved during the run
