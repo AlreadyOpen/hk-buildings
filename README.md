@@ -34,6 +34,10 @@ python publish.py                 # -> Hugging Face (needs HF_TOKEN)
 `HKB_DATA` moves the data folder. The GitHub Action `.github/workflows/bake.yml` runs both weekly, building tippecanoe from its
 tagged source once and caching it.
 
+Before uploading, `publish.py` writes `manifest.json` (sha256 and size of every file, counts, and the sources from
+`sources.json`) and stops if a count drops more than 10% against the published manifest (`manifest.py`; a manual run with
+"force" overrides a drop checked by hand). `check.py` runs on every push (`.github/workflows/check.yml`): no data, no token.
+
 ## Source and terms
 
 Data from the Government of the Hong Kong SAR, Lands Department, via the [CSDI Portal](https://portal.csdi.gov.hk) (Building

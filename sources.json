@@ -1,0 +1,3 @@
+[
+ {"name": "Building (CSDI, landsd_rcd_1637211194312_35158)", "owner": "Lands Department", "url": "https://portal.csdi.gov.hk/server/rest/services/common/landsd_rcd_1637211194312_35158/MapServer/0", "licence": "https://portal.csdi.gov.hk/csdi-webpage/doc/TNC", "used_by": "buildings.py"}
+]
