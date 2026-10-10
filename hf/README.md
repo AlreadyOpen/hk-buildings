@@ -33,6 +33,8 @@ duckdb.sql("""SELECT BuildingNameEN, height_m FROM 'hf://datasets/alreadyopen/hk
               ORDER BY height_m DESC LIMIT 10""")
 ```
 
+A copy is mirrored to [Kaggle](https://www.kaggle.com/datasets/helenkwok/hk-buildings) after every bake.
+
 ## Source and terms
 
 Data from the Government of the Hong Kong SAR, Lands Department, via the CSDI Portal, used under the
