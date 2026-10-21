@@ -18,7 +18,7 @@ configs:
 # Hong Kong buildings with heights
 
 Every building footprint in Hong Kong (about 342,000) from the Lands Department's CSDI Building layer, with each building's
-own height, rebuilt weekly by [AlreadyOpen/hk-buildings](https://github.com/milleleaf/hk-buildings).
+own height, rebuilt weekly by [milleleaf/hk-buildings](https://github.com/milleleaf/hk-buildings).
 
 `buildings.parquet` is GeoParquet: `geometry` (MultiPolygon, WKB, EPSG:4326) plus `BuildingCSUID`, `BuildingNameEN`,
 `BuildingNameTC`, `BaseHeight` and `TopHeight` (mPD), `height_m` (= TopHeight - BaseHeight, the height above the building's

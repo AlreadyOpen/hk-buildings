@@ -3,7 +3,7 @@
 Every building in Hong Kong (about 342,000 footprints) with its own height, from the Lands Department's CSDI Building layer,
 baked weekly and published for browsers and data tools to read in place.
 
-Part of [AlreadyOpen](https://github.com/milleleaf): open, re-runnable pipelines over public data.
+Part of [Milleleaf](https://github.com/milleleaf): open, re-runnable pipelines over public data.
 
 | Output | Where | Format |
 |---|---|---|
