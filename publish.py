@@ -8,7 +8,7 @@ import json, os
 from huggingface_hub import HfApi, batch_bucket_files, create_bucket
 import manifest, sources
 
-REPO = 'alreadyopen/hk-buildings'
+REPO = 'milleleaf/hk-buildings'
 
 def main():
     o = lambda f: os.path.join(sources.OUT, f); idx = json.load(open(o('index.json')))

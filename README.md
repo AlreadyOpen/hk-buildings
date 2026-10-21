@@ -3,12 +3,12 @@
 Every building in Hong Kong (about 342,000 footprints) with its own height, from the Lands Department's CSDI Building layer,
 baked weekly and published for browsers and data tools to read in place.
 
-Part of [AlreadyOpen](https://github.com/AlreadyOpen): open, re-runnable pipelines over public data.
+Part of [AlreadyOpen](https://github.com/milleleaf): open, re-runnable pipelines over public data.
 
 | Output | Where | Format |
 |---|---|---|
-| Vector tiles for maps, z13-16 (MapLibre overzooms past 16), layer `buildings` | [huggingface.co/buckets/alreadyopen/hk-buildings](https://huggingface.co/buckets/alreadyopen/hk-buildings) `buildings.pmtiles` | PMTiles, tiles gzipped inside |
-| Every building with its footprint, for queries and low zooms | [huggingface.co/datasets/alreadyopen/hk-buildings](https://huggingface.co/datasets/alreadyopen/hk-buildings) `buildings.parquet` | GeoParquet (WKB, EPSG:4326), ZSTD |
+| Vector tiles for maps, z13-16 (MapLibre overzooms past 16), layer `buildings` | [huggingface.co/buckets/milleleaf/hk-buildings](https://huggingface.co/buckets/milleleaf/hk-buildings) `buildings.pmtiles` | PMTiles, tiles gzipped inside |
+| Every building with its footprint, for queries and low zooms | [huggingface.co/datasets/milleleaf/hk-buildings](https://huggingface.co/datasets/milleleaf/hk-buildings) `buildings.parquet` | GeoParquet (WKB, EPSG:4326), ZSTD |
 
 Both answer CORS and HTTP Range requests: MapLibre reads the PMTiles with the `pmtiles://` protocol, DuckDB (also DuckDB-Wasm)
 reads the Parquet without downloading it whole.
