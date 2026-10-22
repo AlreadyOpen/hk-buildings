@@ -1,6 +1,6 @@
 """Publish the bake to Hugging Face (needs HF_TOKEN with write access to the alreadyopen org):
-  dataset alreadyopen/hk-buildings  buildings.parquet (GeoParquet) + index.json, and the card (hf/README.md); one commit a run
-  bucket  alreadyopen/hk-buildings  buildings.pmtiles + index.json, overwritten in place (read by browsers: CORS + HTTP Range)
+  dataset milleleaf/hk-buildings  buildings.parquet (GeoParquet) + index.json, and the card (hf/README.md); one commit a run
+  bucket  milleleaf/hk-buildings  buildings.pmtiles + index.json, overwritten in place (read by browsers: CORS + HTTP Range)
   manifest.json (both): sha256 of every file, counts, sources
 Nothing is uploaded unless the publish gate passes (manifest.py: no count drops > 10% against the published manifest).
 Usage: python3 publish.py     (after buildings.py)"""

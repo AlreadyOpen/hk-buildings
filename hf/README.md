@@ -25,11 +25,11 @@ own height, rebuilt weekly by [milleleaf/hk-buildings](https://github.com/millel
 base; empty when either is missing), `Storeys`, `StoreysInBasement`, `BuildingBlockType`, `Status`.
 
 Vector tiles of the same buildings for web maps (PMTiles, z13-16) are in the bucket
-[alreadyopen/hk-buildings](https://huggingface.co/buckets/milleleaf/hk-buildings).
+[milleleaf/hk-buildings](https://huggingface.co/buckets/milleleaf/hk-buildings).
 
 ```python
 import duckdb
-duckdb.sql("""SELECT BuildingNameEN, height_m FROM 'hf://datasets/alreadyopen/hk-buildings/buildings.parquet'
+duckdb.sql("""SELECT BuildingNameEN, height_m FROM 'hf://datasets/milleleaf/hk-buildings/buildings.parquet'
               ORDER BY height_m DESC LIMIT 10""")
 ```
 
